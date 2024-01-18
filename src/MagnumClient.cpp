@@ -104,8 +104,7 @@ void MagnumClient::xytheta(const ElementId & id,
   widget<XYTheta>(id, gui_, requestId).data(ro, xytheta, altitude);
 }
 
-void MagnumClient::robot(const ElementId & id,
-                         const mc_control::RobotMsg & msg)
+void MagnumClient::robot(const ElementId & id, const mc_control::RobotMsg & msg)
 {
   widget<Robot>(id, gui_).data(msg);
 }

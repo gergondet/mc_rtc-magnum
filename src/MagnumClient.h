@@ -76,8 +76,7 @@ private:
                const Eigen::Vector3d & xytheta,
                double altitude) override;
 
-  void robot(const ElementId & id,
-             const mc_control::RobotMsg & msg) override;
+  void robot(const ElementId & id, const mc_control::RobotMsg & msg) override;
 
   void visual(const ElementId & id, const rbd::parsers::Visual & visual, const sva::PTransformd & pos) override;
 };
