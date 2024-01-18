@@ -77,9 +77,7 @@ private:
                double altitude) override;
 
   void robot(const ElementId & id,
-             const std::vector<std::string> & params,
-             const std::vector<std::vector<double>> & q,
-             const sva::PTransformd & posW) override;
+             const mc_control::RobotMsg & msg) override;
 
   void visual(const ElementId & id, const rbd::parsers::Visual & visual, const sva::PTransformd & pos) override;
 };

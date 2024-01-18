@@ -17,9 +17,7 @@ struct Robot : public Widget
 
   ~Robot() override;
 
-  void data(const std::vector<std::string> & params,
-            const std::vector<std::vector<double>> & q,
-            const sva::PTransformd & posW);
+  void data(const mc_control::RobotMsg & msg);
 
   void draw2D() override;
 

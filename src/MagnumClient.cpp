@@ -105,11 +105,9 @@ void MagnumClient::xytheta(const ElementId & id,
 }
 
 void MagnumClient::robot(const ElementId & id,
-                         const std::vector<std::string> & params,
-                         const std::vector<std::vector<double>> & q,
-                         const sva::PTransformd & posW)
+                         const mc_control::RobotMsg & msg)
 {
-  widget<Robot>(id, gui_).data(params, q, posW);
+  widget<Robot>(id, gui_).data(msg);
 }
 
 void MagnumClient::visual(const ElementId & id, const rbd::parsers::Visual & visual, const sva::PTransformd & pos)

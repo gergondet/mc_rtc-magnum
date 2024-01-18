@@ -205,15 +205,13 @@ struct RobotImpl
 
   inline McRtcGui & gui() { return self_.gui(); }
 
-  void data(const std::vector<std::string> & params,
-            const std::vector<std::vector<double>> & q,
-            const sva::PTransformd & posW)
+  void data(const mc_control::RobotMsg & msg)
   {
-    if(!robots_ || robot().module().parameters() != params)
+    if(!robots_ || robot().module().parameters() != msg.parameters)
     {
       visualRobot_.clear();
       collisionRobot_.clear();
-      robots_ = RobotCache::get_robot(params);
+      robots_ = RobotCache::get_robot(msg.parameters);
       const auto & rm = robots_->robot().module();
       const auto & bodies = robot().mb().bodies();
       auto loadVisuals = [this, &rm](auto & object, const auto & visuals, const std::string & name)
@@ -230,8 +228,8 @@ struct RobotImpl
       visualRobot_.alpha(1.0f);
       collisionRobot_.alpha(1.0f);
     }
-    setConfiguration(robot(), q);
-    robot().posW(posW);
+    setConfiguration(robot(), msg.q);
+    robot().posW(msg.posW);
   }
 
   void draw2D()
@@ -284,11 +282,9 @@ Robot::Robot(Client & client, const ElementId & id, McRtcGui & gui)
 
 Robot::~Robot() = default;
 
-void Robot::data(const std::vector<std::string> & params,
-                 const std::vector<std::vector<double>> & q,
-                 const sva::PTransformd & posW)
+void Robot::data(const mc_control::RobotMsg & msg)
 {
-  impl_->data(params, q, posW);
+  impl_->data(msg);
 }
 
 void Robot::draw2D()
