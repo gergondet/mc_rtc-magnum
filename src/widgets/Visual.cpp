@@ -36,7 +36,9 @@ void Visual::draw3D()
       object_ = gui_.loadMesh(path.string(), color(visual_.material));
     }
     const auto & scaleV = in.scaleV;
-    object_->setTransformation(convert(pos_) * Matrix4::scaling({scaleV.x(), scaleV.y(), scaleV.z()}));
+    object_->setTransformation(convert(pos_)
+                               * Matrix4::scaling({static_cast<float>(scaleV.x()), static_cast<float>(scaleV.y()),
+                                                   static_cast<float>(scaleV.z())}));
   };
   auto handleBox = [&]()
   {
