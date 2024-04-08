@@ -62,15 +62,13 @@ McRtcGui::McRtcGui(const Arguments & arguments)
       ("name", po::value<std::string>(&name), "Window name");
     // clang-format on
 
-    
-
     po::variables_map vm;
     po::store(po::command_line_parser(arguments.argc, arguments.argv).options(desc).run(), vm);
     po::notify(vm);
     if(vm.count("help")) { std::cout << desc << "\n"; }
-    if( vm.count("tcp") || ( vm.count("tcp-pub-port") || vm.count("tcp-sub-port") ) )
+    if(vm.count("tcp") || (vm.count("tcp-pub-port") || vm.count("tcp-sub-port")))
     {
-      client_.connect(fmt::format("tcp://{}:{}", host,sub_port), fmt::format("tcp://{}:{}", host,pub_port));
+      client_.connect(fmt::format("tcp://{}:{}", host, sub_port), fmt::format("tcp://{}:{}", host, pub_port));
     }
     setWindowTitle(name);
   }
