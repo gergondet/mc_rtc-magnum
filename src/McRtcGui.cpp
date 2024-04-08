@@ -48,18 +48,31 @@ McRtcGui::McRtcGui(const Arguments & arguments)
   client_(*this)
 {
   {
-    std::string host;
+    std::string host = "localhost";
+    std::string sub_port = "4242";
+    std::string pub_port = "4343";
+    std::string name = "mc_rtc - Magnum based GUI";
     po::options_description desc("mc-rtc-magnum options");
     // clang-format off
     desc.add_options()
       ("help", "Show this help message")
-      ("tcp", po::value<std::string>(&host), "Connect to the given host with TCP");
+      ("tcp", po::value<std::string>(&host), "Connect to the given host with TCP")
+      ("tcp-pub-port", po::value<std::string>(&sub_port), "Connect to the given publisher port with TCP")
+      ("tcp-sub-port", po::value<std::string>(&pub_port), "Connect to the given subscriber port with TCP")
+      ("name", po::value<std::string>(&name), "Window name");
     // clang-format on
+
+    
+
     po::variables_map vm;
     po::store(po::command_line_parser(arguments.argc, arguments.argv).options(desc).run(), vm);
     po::notify(vm);
     if(vm.count("help")) { std::cout << desc << "\n"; }
-    if(vm.count("tcp")) { client_.connect(fmt::format("tcp://{}:4242", host), fmt::format("tcp://{}:4343", host)); }
+    if( vm.count("tcp") || ( vm.count("tcp-pub-port") || vm.count("tcp-sub-port") ) )
+    {
+      client_.connect(fmt::format("tcp://{}:{}", host,sub_port), fmt::format("tcp://{}:{}", host,pub_port));
+    }
+    setWindowTitle(name);
   }
   {
     ImGui::CreateContext();
