@@ -18,53 +18,39 @@ namespace mc_rtc::magnum
 {
 
 InteractiveMarkerPtr MagnumClient::make_marker(const sva::PTransformd & pose, ControlAxis mask)
-{
-  return std::make_unique<InteractiveMarkerImpl>(gui_.camera(), pose, mask);
-}
+{ return std::make_unique<InteractiveMarkerImpl>(gui_.camera(), pose, mask); }
 
 void MagnumClient::point3d(const ElementId & id,
                            const ElementId & requestId,
                            bool ro,
                            const Eigen::Vector3d & pos,
                            const mc_rtc::gui::PointConfig & config)
-{
-  widget<Point3D>(id, gui_, requestId).data(ro, pos, config);
-}
+{ widget<Point3D>(id, gui_, requestId).data(ro, pos, config); }
 
 void MagnumClient::trajectory(const ElementId & id,
                               const std::vector<Eigen::Vector3d> & points,
                               const mc_rtc::gui::LineConfig & config)
-{
-  widget<Trajectory<Eigen::Vector3d>>(id, gui_).data(points, config);
-}
+{ widget<Trajectory<Eigen::Vector3d>>(id, gui_).data(points, config); }
 
 void MagnumClient::trajectory(const ElementId & id,
                               const std::vector<sva::PTransformd> & points,
                               const mc_rtc::gui::LineConfig & config)
-{
-  widget<Trajectory<sva::PTransformd>>(id, gui_).data(points, config);
-}
+{ widget<Trajectory<sva::PTransformd>>(id, gui_).data(points, config); }
 
 void MagnumClient::trajectory(const ElementId & id,
                               const Eigen::Vector3d & point,
                               const mc_rtc::gui::LineConfig & config)
-{
-  widget<Trajectory<Eigen::Vector3d>>(id, gui_).data(point, config);
-}
+{ widget<Trajectory<Eigen::Vector3d>>(id, gui_).data(point, config); }
 
 void MagnumClient::trajectory(const ElementId & id,
                               const sva::PTransformd & point,
                               const mc_rtc::gui::LineConfig & config)
-{
-  widget<Trajectory<sva::PTransformd>>(id, gui_).data(point, config);
-}
+{ widget<Trajectory<sva::PTransformd>>(id, gui_).data(point, config); }
 
 void MagnumClient::polygon(const ElementId & id,
                            const std::vector<std::vector<Eigen::Vector3d>> & points,
                            const mc_rtc::gui::LineConfig & config)
-{
-  widget<Polygon>(id, gui_).data(points, config);
-}
+{ widget<Polygon>(id, gui_).data(points, config); }
 
 void MagnumClient::force(const ElementId & id,
                          const ElementId & requestId,
@@ -72,9 +58,7 @@ void MagnumClient::force(const ElementId & id,
                          const sva::PTransformd & pos,
                          const mc_rtc::gui::ForceConfig & forceConfig,
                          bool /* ro */)
-{
-  widget<Force>(id, gui_, requestId).data(force, pos, forceConfig);
-}
+{ widget<Force>(id, gui_, requestId).data(force, pos, forceConfig); }
 
 void MagnumClient::arrow(const ElementId & id,
                          const ElementId & requestId,
@@ -82,49 +66,35 @@ void MagnumClient::arrow(const ElementId & id,
                          const Eigen::Vector3d & end,
                          const mc_rtc::gui::ArrowConfig & config,
                          bool ro)
-{
-  widget<Arrow>(id, gui_, requestId).data(start, end, config, ro);
-}
+{ widget<Arrow>(id, gui_, requestId).data(start, end, config, ro); }
 
 void MagnumClient::rotation(const ElementId & id, const ElementId & requestId, bool ro, const sva::PTransformd & pos)
-{
-  widget<Rotation>(id, gui_, requestId).data(ro, pos);
-}
+{ widget<Rotation>(id, gui_, requestId).data(ro, pos); }
 
 void MagnumClient::transform(const ElementId & id, const ElementId & requestId, bool ro, const sva::PTransformd & pos)
-{
-  widget<TransformWidget>(id, gui_, requestId).data(ro, pos);
-}
+{ widget<TransformWidget>(id, gui_, requestId).data(ro, pos); }
 
 void MagnumClient::xytheta(const ElementId & id,
                            const ElementId & requestId,
                            bool ro,
                            const Eigen::Vector3d & xytheta,
                            double altitude)
-{
-  widget<XYTheta>(id, gui_, requestId).data(ro, xytheta, altitude);
-}
+{ widget<XYTheta>(id, gui_, requestId).data(ro, xytheta, altitude); }
 
 void MagnumClient::robot(const ElementId & id,
                          const std::vector<std::string> & params,
                          const std::vector<std::vector<double>> & q,
                          const sva::PTransformd & posW)
-{
-  widget<Robot>(id, gui_).data(params, q, posW);
-}
+{ widget<Robot>(id, gui_).data(params, q, posW); }
 
 void MagnumClient::visual(const ElementId & id, const rbd::parsers::Visual & visual, const sva::PTransformd & pos)
-{
-  widget<Visual>(id, gui_).data(visual, pos);
-}
+{ widget<Visual>(id, gui_).data(visual, pos); }
 
 void MagnumClient::polyhedron(const ElementId & id,
                               const std::vector<Eigen::Vector3d> & vertices,
                               const std::vector<std::array<size_t, 3>> & triangles,
                               const std::vector<mc_rtc::gui::Color> & colors,
                               const mc_rtc::gui::PolyhedronConfig & config)
-{
-  widget<Polyhedron>(id, gui_).data(vertices, triangles, colors, config);
-}
+{ widget<Polyhedron>(id, gui_).data(vertices, triangles, colors, config); }
 
 } // namespace mc_rtc::magnum
