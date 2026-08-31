@@ -89,7 +89,10 @@ bool Camera::keyPressEvent(Platform::Application & app, KeyEvent & event)
       cameraPosition_ = {0.0f, multiplier * 5.0f, 1.0f};
       focusPoint_ = {0.0f, 0.0f, 1.0f};
     }
-    else { CORRADE_INTERNAL_ASSERT_UNREACHABLE(); }
+    else
+    {
+      CORRADE_INTERNAL_ASSERT_UNREACHABLE();
+    }
 
     setTransform(app);
     app.redraw();
@@ -156,7 +159,10 @@ bool Camera::mouseScrollEvent(Platform::Application & app, MouseScrollEvent & ev
 
   Vector3 direction = (cameraPosition_ - focusPoint_);
   if(move < 0) { cameraPosition_ += scale * direction; }
-  else { cameraPosition_ -= scale * direction; }
+  else
+  {
+    cameraPosition_ -= scale * direction;
+  }
   setTransform(app);
 
   event.setAccepted();
@@ -165,8 +171,6 @@ bool Camera::mouseScrollEvent(Platform::Application & app, MouseScrollEvent & ev
 }
 
 void Camera::viewportEvent(ViewportEvent & event)
-{
-  setProjection(event.windowSize());
-}
+{ setProjection(event.windowSize()); }
 
 } // namespace mc_rtc::magnum
