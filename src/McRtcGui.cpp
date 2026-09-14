@@ -31,9 +31,7 @@ struct Grid : public SceneGraph::Drawable3D
   }
 
   void draw(const Matrix4 & transformation, SceneGraph::Camera3D & camera) override
-  {
-    shader_.setTransformationProjectionMatrix(camera.projectionMatrix() * transformation).draw(mesh_);
-  }
+  { shader_.setTransformationProjectionMatrix(camera.projectionMatrix() * transformation).draw(mesh_); }
 
 private:
   Shaders::FlatGL3D shader_;
@@ -41,10 +39,10 @@ private:
 };
 
 McRtcGui::McRtcGui(const Arguments & arguments)
-: Platform::Application{arguments, Configuration{}
-                                       .setTitle("mc_rtc - Magnum based GUI")
-                                       .setWindowFlags(Configuration::WindowFlag::Resizable
-                                                       | Configuration::WindowFlag::Maximized)},
+: Platform::Application{
+      arguments, Configuration{}
+                     .setTitle("mc_rtc - Magnum based GUI")
+                     .setWindowFlags(Configuration::WindowFlag::Resizable | Configuration::WindowFlag::Maximized)},
   client_(*this)
 {
   {
@@ -340,9 +338,7 @@ EllipsoidPtr McRtcGui::makeEllipsoid(Vector3 center,
 }
 
 PolyhedronPtr McRtcGui::makePolyhedron()
-{
-  return std::make_shared<PolyhedronDrawable>(&scene_, &polyhedrons_);
-}
+{ return std::make_shared<PolyhedronDrawable>(&scene_, &polyhedrons_); }
 
 void McRtcGui::drawLine(Vector3 start, Vector3 end, Color4 color, float /*thickness*/)
 {

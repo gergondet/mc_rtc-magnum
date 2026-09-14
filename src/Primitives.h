@@ -63,7 +63,10 @@ public:
       ambient_ = 0x000000ff_rgbaf;
       ambient_.a() = 0.0f;
     }
-    else { ambient_ = Color4::fromHsv({color_.hue(), 1.0f, 0.3f}, 0.0f); }
+    else
+    {
+      ambient_ = Color4::fromHsv({color_.hue(), 1.0f, 0.3f}, 0.0f);
+    }
   }
 
   inline void alpha(float alpha) noexcept override
