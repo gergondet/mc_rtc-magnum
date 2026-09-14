@@ -19,9 +19,7 @@ private:
   std::vector<std::vector<Eigen::Vector3d>> points_;
   mc_rtc::gui::LineConfig config_;
   struct PolygonData
-  {
-    std::optional<GL::Mesh> mesh;
-  };
+  { std::optional<GL::Mesh> mesh; };
   std::vector<PolygonData> polygons_;
   Shaders::LineGL3D lineShader_;
 };
