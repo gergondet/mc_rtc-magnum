@@ -13,9 +13,7 @@ struct XYTheta : public TransformBase<ControlAxis::XYZTHETA>
   }
 
   void data(bool ro, const Eigen::Vector3d & xytheta, double altitude)
-  {
-    TransformBase::data(ro, {sva::RotZ(xytheta.z()), {xytheta.x(), xytheta.y(), altitude}});
-  }
+  { TransformBase::data(ro, {sva::RotZ(xytheta.z()), {xytheta.x(), xytheta.y(), altitude}}); }
 
   void draw3D() override
   {

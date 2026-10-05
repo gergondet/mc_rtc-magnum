@@ -20,7 +20,7 @@ struct InteractiveMarkerImpl : public mc_rtc::imgui::InteractiveMarker
                         const sva::PTransformd & pose = sva::PTransformd::Identity(),
                         ControlAxis mask = ControlAxis::NONE);
 
-  ~InteractiveMarkerImpl() override{};
+  ~InteractiveMarkerImpl() override {};
 
   void mask(ControlAxis mask) override;
 
