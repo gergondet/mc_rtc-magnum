@@ -25,19 +25,13 @@ namespace mc_rtc::magnum
 {
 
 inline Magnum::Color4 convert(const mc_rtc::gui::Color & c)
-{
-  return {static_cast<float>(c.r), static_cast<float>(c.g), static_cast<float>(c.b), static_cast<float>(c.a)};
-}
+{ return {static_cast<float>(c.r), static_cast<float>(c.g), static_cast<float>(c.b), static_cast<float>(c.a)}; }
 
 inline Magnum::Vector3 translation(const Eigen::Vector3d & v)
-{
-  return {static_cast<float>(v.x()), static_cast<float>(v.y()), static_cast<float>(v.z())};
-}
+{ return {static_cast<float>(v.x()), static_cast<float>(v.y()), static_cast<float>(v.z())}; }
 
 inline Magnum::Vector3 translation(const sva::PTransformd & pt)
-{
-  return translation(pt.translation());
-}
+{ return translation(pt.translation()); }
 
 inline Magnum::Matrix3 rotation(const Eigen::Matrix3d & m)
 {
@@ -46,24 +40,16 @@ inline Magnum::Matrix3 rotation(const Eigen::Matrix3d & m)
 }
 
 inline Magnum::Matrix3 rotation(const sva::PTransformd & pt)
-{
-  return rotation(pt.rotation());
-}
+{ return rotation(pt.rotation()); }
 
 inline Magnum::Matrix3 convert(const Eigen::Matrix3d & m)
-{
-  return rotation(m);
-}
+{ return rotation(m); }
 
 inline Magnum::Matrix4 convert(const sva::PTransformd & pt)
-{
-  return Magnum::Matrix4::from(convert(pt.rotation()), translation(pt.translation()));
-}
+{ return Magnum::Matrix4::from(convert(pt.rotation()), translation(pt.translation())); }
 
 inline Magnum::Matrix4 convert(const Eigen::Vector3d & t)
-{
-  return Magnum::Matrix4::translation(translation(t));
-}
+{ return Magnum::Matrix4::translation(translation(t)); }
 
 inline sva::PTransformd convert(const Magnum::Matrix4 & m)
 {
@@ -92,7 +78,10 @@ inline bfs::path convertURI(const std::string & uri, [[maybe_unused]] std::strin
     {
       pkg = (MC_ENV_DESCRIPTION_PATH / ".." / "mc_int_obj_description").string();
     }
-    else { pkg = default_dir; }
+    else
+    {
+      pkg = default_dir;
+    }
 #  else
 #    ifdef MC_RTC_ROS_IS_ROS2
     pkg = ament_index_cpp::get_package_share_directory(pkg);

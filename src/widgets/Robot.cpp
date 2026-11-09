@@ -171,7 +171,10 @@ struct RobotObject : public Object3D, public SceneGraph::Drawable3D
   void visible(bool v) noexcept
   {
     if(v) { parent_group_->add(*this); }
-    else { parent_group_->remove(*this); }
+    else
+    {
+      parent_group_->remove(*this);
+    }
     visible_ = v;
   }
 
@@ -287,18 +290,12 @@ Robot::~Robot() = default;
 void Robot::data(const std::vector<std::string> & params,
                  const std::vector<std::vector<double>> & q,
                  const sva::PTransformd & posW)
-{
-  impl_->data(params, q, posW);
-}
+{ impl_->data(params, q, posW); }
 
 void Robot::draw2D()
-{
-  impl_->draw2D();
-}
+{ impl_->draw2D(); }
 
 void Robot::draw3D()
-{
-  impl_->draw3D();
-}
+{ impl_->draw3D(); }
 
 } // namespace mc_rtc::magnum

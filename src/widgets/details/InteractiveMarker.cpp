@@ -12,9 +12,7 @@ namespace mc_rtc::magnum
 {
 
 static inline bool has(ControlAxis mask, ControlAxis value)
-{
-  return static_cast<std::underlying_type_t<ControlAxis>>(mask & value) != 0;
-}
+{ return static_cast<std::underlying_type_t<ControlAxis>>(mask & value) != 0; }
 
 static inline ImGuizmo::OPERATION convert(ControlAxis mask)
 {
@@ -35,9 +33,7 @@ int InteractiveMarkerImpl::next_id_ = 0;
 
 InteractiveMarkerImpl::InteractiveMarkerImpl(const Camera & camera, const sva::PTransformd & pose, ControlAxis mask)
 : mc_rtc::imgui::InteractiveMarker(pose, mask), camera_(camera), id_(next_id_++)
-{
-  this->mask(mask);
-}
+{ this->mask(mask); }
 
 void InteractiveMarkerImpl::mask(ControlAxis mask)
 {

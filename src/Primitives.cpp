@@ -13,7 +13,10 @@ static void set_children_hidden(Object3D * object, bool hidden)
   {
     auto * cd = dynamic_cast<CommonDrawable *>(&c);
     if(cd) { cd->hidden(hidden); }
-    else { set_children_hidden(&c, hidden); }
+    else
+    {
+      set_children_hidden(&c, hidden);
+    }
   }
 }
 
@@ -22,7 +25,10 @@ void CommonDrawable::hidden(bool hidden) noexcept
   if(hidden_ == hidden) { return; }
   hidden_ = hidden;
   if(hidden) { group_->remove(*this); }
-  else { group_->add(*this); }
+  else
+  {
+    group_->add(*this);
+  }
   set_children_hidden(this, hidden);
 }
 
@@ -35,7 +41,10 @@ ColoredDrawable::ColoredDrawable(Object3D * object,
 : CommonDrawable(object, group), shader_(shader), mesh_(mesh), color_(color)
 {
   if(ambient) { ambient_ = *ambient; }
-  else { colorWithAmbient(color_); }
+  else
+  {
+    colorWithAmbient(color_);
+  }
   ambient_.a() = 0.0f;
 }
 
@@ -76,14 +85,10 @@ Sphere::Sphere(Object3D * parent,
                float radius,
                Color4 color)
 : ColoredDrawable(parent, group, shader, mesh, color), center_(center), radius_(radius)
-{
-  update();
-}
+{ update(); }
 
 void Sphere::update() noexcept
-{
-  setTransformation(Matrix4::from(Matrix3{Math::IdentityInit, radius_}, center_));
-}
+{ setTransformation(Matrix4::from(Matrix3{Math::IdentityInit, radius_}, center_)); }
 
 Box::Box(Object3D * parent,
          SceneGraph::DrawableGroup3D * group,
@@ -93,14 +98,10 @@ Box::Box(Object3D * parent,
          Vector3 size,
          Color4 color)
 : ColoredDrawable(parent, group, shader, mesh, color), pose_(pose), size_(size)
-{
-  update();
-}
+{ update(); }
 
 void Box::update() noexcept
-{
-  setTransformation(pose_ * Matrix4::scaling(size_ / 2.0));
-}
+{ setTransformation(pose_ * Matrix4::scaling(size_ / 2.0)); }
 
 void PolyhedronDrawable::draw_(const Matrix4 & transformationMatrix, SceneGraph::Camera3D & camera)
 {
